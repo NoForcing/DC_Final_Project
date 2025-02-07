@@ -20,39 +20,26 @@ option = st.sidebar.selectbox("options", ["Scrape data using selenium", "Downloa
 if option == "Scrape data using selenium" :
     st.title("Scrape data using selenium")
 
-    
     if st.button('Scrape Auto Data'):
         dataframe = fn.auto_data_scrape(page_indexes)
-        csv = dataframe.to_csv(index=False)
-        st.success('Car data scraped successfully!')
-        st.download_button(
-            label="Download CSV",
-            data=csv,
-            file_name='auto_data.csv',
-            mime='text/csv',
-        )    
+        st.subheader('Display data dimension')
+        st.write('Data dimension: ' + str(dataframe.shape[0]) + ' rows and ' + str(dataframe.shape[1]) + ' columns.')
+        st.dataframe(dataframe)
+    
     
     if st.button('Scrape Scooter Data'):
         dataframe=fn.scooters_data_scrape(page_indexes)
-        csv = dataframe.to_csv(index=False)
-        st.success('Scooter data scraped successfully!')
-        st.download_button(
-            label="Download CSV",
-            data=csv,
-            file_name='scooter_data.csv',
-            mime='text/csv',
-        )    
+        st.subheader('Display data dimension')
+        st.write('Data dimension: ' + str(dataframe.shape[0]) + ' rows and ' + str(dataframe.shape[1]) + ' columns.')
+        st.dataframe(dataframe)
 
     if st.button('Scrape Rental Car Data'):
         dataframe=fn.rented_auto_data_scrape(page_indexes)
-        csv = dataframe.to_csv(index=False)
-        st.success('Rental car data scraped successfully!')
-        st.download_button(
-                label="Download CSV",
-                data=csv,
-                file_name='rented_auto_data.csv',
-                mime='text/csv',
-            )    
+        st.subheader('Display data dimension')
+        st.write('Data dimension: ' + str(dataframe.shape[0]) + ' rows and ' + str(dataframe.shape[1]) + ' columns.')
+        st.dataframe(dataframe)
+
+
 elif option == "Download scraped data":
     st.markdown("<h1 style='text-align: center; color: black;'>MY DATA APP</h1>", unsafe_allow_html=True)
     st.markdown("""
@@ -77,9 +64,6 @@ elif option == "Download scraped data":
 elif option == "Dashbord of the data":
     st.title("Dashbord of the data")
     df=pd.read_csv('data/web_scraper/raw/dakar_auto.csv')
-    #sns.pairplot(data=df)
-    #plt.show()
-    #st.write(data2)
     df = pd.read_csv('data/web_scraper/raw/dakar_auto.csv')
     fig = sns.pairplot(data=df)
     st.pyplot(fig)
