@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import fonctions as fn
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 
@@ -13,39 +15,46 @@ page_indexes = st.sidebar.selectbox("page indexes", [1,2,3,4,5,6,7,8,9,10,11,12,
 
 option = st.sidebar.selectbox("options", ["Scrape data using selenium", "Download scraped data", "Dashbord of the data", "Fill the form"])
 
-#data1, data2, data3 = load_data()
 
 # Display selected option
 if option == "Scrape data using selenium" :
     st.title("Scrape data using selenium")
 
     
-    
     if st.button('Scrape Auto Data'):
         dataframe = fn.auto_data_scrape(page_indexes)
         csv = dataframe.to_csv(index=False)
+        st.success('Car data scraped successfully!')
         st.download_button(
             label="Download CSV",
             data=csv,
             file_name='auto_data.csv',
             mime='text/csv',
-        )
-        st.success('Car data scraped successfully!')
-
-        
+        )    
+    
     if st.button('Scrape Scooter Data'):
-        fn.scooters_data_scrape(page_indexes)
+        dataframe=fn.scooters_data_scrape(page_indexes)
+        csv = dataframe.to_csv(index=False)
         st.success('Scooter data scraped successfully!')
+        st.download_button(
+            label="Download CSV",
+            data=csv,
+            file_name='scooter_data.csv',
+            mime='text/csv',
+        )    
 
     if st.button('Scrape Rental Car Data'):
-        fn.rented_auto_data_scrape(page_indexes)
+        dataframe=fn.rented_auto_data_scrape(page_indexes)
+        csv = dataframe.to_csv(index=False)
         st.success('Rental car data scraped successfully!')
-    #dataframes = fn.auto_data_scrape(page_indexes)
-    #fn.load_(dataframes, ' Darkar Auto ', '1')
+        st.download_button(
+                label="Download CSV",
+                data=csv,
+                file_name='rented_auto_data.csv',
+                mime='text/csv',
+            )    
 elif option == "Download scraped data":
-    #st.title("Dakar Auto")
     st.markdown("<h1 style='text-align: center; color: black;'>MY DATA APP</h1>", unsafe_allow_html=True)
-
     st.markdown("""
     This app allows you to download scraped data on auto from dakar-auto.com,  
     * **Python libraries:** base64, pandas, streamlit
@@ -67,7 +76,13 @@ elif option == "Download scraped data":
     #st.write(data1)
 elif option == "Dashbord of the data":
     st.title("Dashbord of the data")
+    df=pd.read_csv('data/web_scraper/raw/dakar_auto.csv')
+    #sns.pairplot(data=df)
+    #plt.show()
     #st.write(data2)
+    df = pd.read_csv('data/web_scraper/raw/dakar_auto.csv')
+    fig = sns.pairplot(data=df)
+    st.pyplot(fig)
 elif option == "Fill the form":
     st.title("Fill the form")
     st.markdown("""
@@ -76,7 +91,6 @@ elif option == "Fill the form":
 
     
     
-    #st.write(data3)
 
 
 
