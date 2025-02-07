@@ -18,8 +18,30 @@ option = st.sidebar.selectbox("options", ["Scrape data using selenium", "Downloa
 # Display selected option
 if option == "Scrape data using selenium" :
     st.title("Scrape data using selenium")
-    dataframes = fn.auto_data_scrape(page_indexes)
-    fn.load_(dataframes, ' Darkar Auto ', '1')
+
+    
+    
+    if st.button('Scrape Auto Data'):
+        dataframe = fn.auto_data_scrape(page_indexes)
+        csv = dataframe.to_csv(index=False)
+        st.download_button(
+            label="Download CSV",
+            data=csv,
+            file_name='auto_data.csv',
+            mime='text/csv',
+        )
+        st.success('Car data scraped successfully!')
+
+        
+    if st.button('Scrape Scooter Data'):
+        fn.scooters_data_scrape(page_indexes)
+        st.success('Scooter data scraped successfully!')
+
+    if st.button('Scrape Rental Car Data'):
+        fn.rented_auto_data_scrape(page_indexes)
+        st.success('Rental car data scraped successfully!')
+    #dataframes = fn.auto_data_scrape(page_indexes)
+    #fn.load_(dataframes, ' Darkar Auto ', '1')
 elif option == "Download scraped data":
     #st.title("Dakar Auto")
     st.markdown("<h1 style='text-align: center; color: black;'>MY DATA APP</h1>", unsafe_allow_html=True)
