@@ -39,7 +39,7 @@ if option == "Scrape data using selenium" :
         st.dataframe(dataframe)
 
 
-if option == "Scrape data using beautifulsoup" :
+elif option == "Scrape data using beautifulsoup" :
     st.title("Scrape data using beautifulsoup")
 
     if st.button('Scrape Auto Data'):
