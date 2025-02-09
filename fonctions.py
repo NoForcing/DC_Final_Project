@@ -185,12 +185,12 @@ def bs4_auto_data_scrape(pages):
             try:
                 marque_annee = container.find('h2', class_= 'listing-card__header__title mb-md-2 mb-0').find('a').text.strip()
                 prix = container.find('h3',class_= 'listing-card__header__price font-weight-bold text-uppercase mb-0').text.strip().replace('F CFA','').replace('\u202f',' ').strip()
-                kilometrage = container.find('ul', class_ = 'list-inline').find_all('li')[1].text.replace('km','').strip()
                 adresse=container.find('div',class_='col-12 entry-zone-address').text.replace("\n","")
+                kilometrage = container.find('ul', class_ = 'list-inline').find_all('li')[1].text.replace('km','').strip()
                 boite_vitesse = container.find('ul', class_ = 'list-inline').find_all('li')[2].text.strip()
                 carburant = container.find('ul', class_ = 'list-inline').find_all('li')[3].text.strip()
                 proprietaire = container.find('p', class_ = 'time-author m-0').find('a').text
-                dic = {'marque_annee': marque_annee, 'prix': prix, 'kilometrage': kilometrage,'adresse':adresse, 'boite_vitesse':boite_vitesse, 'carburant':carburant,'proprietaire':proprietaire}
+                dic = {'marque_annee': marque_annee, 'prix': prix,'adresse':adresse ,'kilometrage': kilometrage, 'boite_vitesse':boite_vitesse, 'carburant':carburant,'proprietaire':proprietaire}
                 data.append(dic)
             except:
                 pass
