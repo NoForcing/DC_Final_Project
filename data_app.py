@@ -16,7 +16,7 @@ option = st.sidebar.selectbox("options", ["Scrape data using Selenium","Scrape d
 
 
 # Display selected option
-if option == "Scrape data using selenium" :
+if option == "Scrape data using Selenium" :
     st.title("Scrape data using selenium")
 
     if st.button('Scrape Auto Data'):
@@ -39,7 +39,7 @@ if option == "Scrape data using selenium" :
         st.dataframe(dataframe)
 
 
-elif option == "Scrape data using beautifulsoup" :
+elif option == "Scrape data using Beautifulsoup" :
     st.title("Scrape data using beautifulsoup")
 
     if st.button('Scrape Auto Data'):
