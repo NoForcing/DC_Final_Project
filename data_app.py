@@ -43,20 +43,20 @@ if option == "Scrape data using beautifulsoup" :
     st.title("Scrape data using beautifulsoup")
 
     if st.button('Scrape Auto Data'):
-        dataframe = fn.auto_data_scrape(page_indexes)
+        dataframe = fn.bs4_auto_data_scrape(page_indexes)
         st.subheader('Display data dimension')
         st.write('Data dimension: ' + str(dataframe.shape[0]) + ' rows and ' + str(dataframe.shape[1]) + ' columns.')
         st.dataframe(dataframe)
     
     
     if st.button('Scrape Scooter Data'):
-        dataframe=fn.scooters_data_scrape(page_indexes)
+        dataframe=fn.bs4_scooters_data_scrape(page_indexes)
         st.subheader('Display data dimension')
         st.write('Data dimension: ' + str(dataframe.shape[0]) + ' rows and ' + str(dataframe.shape[1]) + ' columns.')
         st.dataframe(dataframe)
 
     if st.button('Scrape Rental Car Data'):
-        dataframe=fn.rented_auto_data_scrape(page_indexes)
+        dataframe=fn.bs4_rented_auto_data_scrape(page_indexes)
         st.subheader('Display data dimension')
         st.write('Data dimension: ' + str(dataframe.shape[0]) + ' rows and ' + str(dataframe.shape[1]) + ' columns.')
         st.dataframe(dataframe)

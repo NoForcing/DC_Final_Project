@@ -202,7 +202,7 @@ def bs4_auto_data_scrape(pages):
 
 
 
-def _bs4_scooters_data_scrape(pages):
+def bs4_scooters_data_scrape(pages):
     df = pd.DataFrame()
     for p in range(1, pages + 1):
         
