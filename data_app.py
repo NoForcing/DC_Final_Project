@@ -39,6 +39,28 @@ if option == "Scrape data using selenium" :
         st.dataframe(dataframe)
 
 
+if option == "Scrape data using beautifulsoup" :
+    st.title("Scrape data using beautifulsoup")
+
+    if st.button('Scrape Auto Data'):
+        dataframe = fn.auto_data_scrape(page_indexes)
+        st.subheader('Display data dimension')
+        st.write('Data dimension: ' + str(dataframe.shape[0]) + ' rows and ' + str(dataframe.shape[1]) + ' columns.')
+        st.dataframe(dataframe)
+    
+    
+    if st.button('Scrape Scooter Data'):
+        dataframe=fn.scooters_data_scrape(page_indexes)
+        st.subheader('Display data dimension')
+        st.write('Data dimension: ' + str(dataframe.shape[0]) + ' rows and ' + str(dataframe.shape[1]) + ' columns.')
+        st.dataframe(dataframe)
+
+    if st.button('Scrape Rental Car Data'):
+        dataframe=fn.rented_auto_data_scrape(page_indexes)
+        st.subheader('Display data dimension')
+        st.write('Data dimension: ' + str(dataframe.shape[0]) + ' rows and ' + str(dataframe.shape[1]) + ' columns.')
+        st.dataframe(dataframe)
+
 elif option == "Download scraped data":
     st.markdown("<h1 style='text-align: center; color: black;'>MY DATA APP</h1>", unsafe_allow_html=True)
     st.markdown("""
