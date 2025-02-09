@@ -12,7 +12,7 @@ import seaborn as sns
 st.sidebar.title("User Input Features")
 page_indexes = st.sidebar.selectbox("page indexes", [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
 
-option = st.sidebar.selectbox("options", ["Scrape data using selenium", "Download scraped data", "Dashbord of the data", "Fill the form"])
+option = st.sidebar.selectbox("options", ["Scrape data using Selenium","Scrape data using Beautifulsoup" ,"Download scraped data", "Dashbord of the data", "Fill the form"])
 
 
 # Display selected option
