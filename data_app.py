@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 
 
+df=pd.read_csv('./data/auto_data_cleaned.csv')
 
 
 
@@ -85,7 +86,6 @@ elif option == "Download scraped data":
     #st.write(data1)
 elif option == "Dashbord of the data":
     st.title("Dashbord of the data")
-    df=pd.read_csv('./data/auto_data_cleaned.csv')
     top_marques = df['marque'].value_counts().nlargest(5).reset_index()
     
         # Mise en page avec Streamlit
