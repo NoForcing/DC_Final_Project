@@ -88,10 +88,11 @@ elif option == "Dashbord of the data":
     df=pd.read_csv('data/auto_data_cleaned.csv')
     top_marques = df['marque'].value_counts().nlargest(5).reset_index()
     
-    # Layout avec deux colonnes
-    col1, col2 = st.columns(2)
+        # Mise en page avec Streamlit
+    row1_col1, row1_col2 = st.columns(2)  # Première ligne
+    row2_col1, row2_col2 = st.columns(2)  # Deuxième ligne
     # Création du graphique
-    with col1:
+    with row1_col1:
         fig1, ax1 = plt.subplots(figsize=(8, 5))
         sns.barplot(data=top_marques, x='marque', y='count',hue='marque', palette='viridis', ax=ax1 )
         ax1.set_title("Top 5 des marques les plus vendues")
@@ -100,17 +101,30 @@ elif option == "Dashbord of the data":
         # Affichage dans Streamlit
         st.pyplot(fig1)
 
-    # Graphiques côte à côte pour carburant et boîte de vitesse
-    var = ['carburant', 'boite_vitesse']
-    for i, col in enumerate(var):
-        with col2 if i == 1 else col1:  # Assigner chaque graphique à la bonne colonne
-            #st.subheader(f"Distribution de {col}")
-            fig2, ax2 = plt.subplots(figsize=(8, 5))
-            sns.countplot(data=df, x=col, hue=col, ax=ax2)
-            ax2.set_title(f"Distribution de {col}")
-            ax2.set_xlabel(col)
-            ax2.set_ylabel("Fréquence")
-            st.pyplot(fig2)
+        # Distribution du carburant
+    with row1_col2:
+        #st.subheader("Distribution du carburant")
+        fig2, ax2 = plt.subplots(figsize=(8, 5))
+        sns.countplot(data=df, x='carburant', hue='carburant', ax=ax2)
+        ax2.set_title("Distribution des carburants")
+        st.pyplot(fig2)
+
+    # Distribution de la boîte de vitesse
+    with row2_col1:
+        #st.subheader("Distribution de la boîte de vitesse")
+        fig3, ax3 = plt.subplots(figsize=(8, 5))
+        sns.countplot(data=df, x='boite_vitesse', hue='boite_vitesse', ax=ax3)
+        ax3.set_title("Distribution des boîtes de vitesse")
+        st.pyplot(fig3)
+
+    # Histogramme des prix
+    with row2_col2:
+        #st.subheader("Distribution des prix")
+        fig4, ax4 = plt.subplots(figsize=(8, 5))
+        sns.histplot(df['prix'], bins=5, kde=True, ax=ax4)
+        ax4.set_title("Histogramme des prix")
+        st.pyplot(fig4)
+
 
 
     
