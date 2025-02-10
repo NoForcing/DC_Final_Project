@@ -88,14 +88,32 @@ elif option == "Dashbord of the data":
     df=pd.read_csv('data/auto_data_cleaned.csv')
     top_marques = df['marque'].value_counts().nlargest(5).reset_index()
     
-    # Diagramme à barres
-    plt.figure(figsize=(8, 5))
-    sns.barplot(data=top_marques, x='marque',y='count', hue='marque',palette='viridis')
-    plt.title("Top 5 des marques les plus vendues")
-    plt.xlabel("Marque")
-    plt.show()
-    fig = sns.pairplot(data=df)
-    #st.pyplot(fig)
+    # Layout avec deux colonnes
+    col1, col2 = st.columns(2)
+    # Création du graphique
+    with col1:
+        fig1, ax1 = plt.subplots(figsize=(8, 5))
+        sns.barplot(data=top_marques, x='marque', y='count',hue='marque', palette='viridis', ax=ax1 )
+        ax1.set_title("Top 5 des marques les plus vendues")
+        ax1.set_xlabel("Marque")
+        ax1.set_ylabel("Nombre de ventes")
+        # Affichage dans Streamlit
+        st.pyplot(fig1)
+
+    # Graphiques côte à côte pour carburant et boîte de vitesse
+    var = ['carburant', 'boite_vitesse']
+    for i, col in enumerate(var):
+        with col2 if i == 1 else col1:  # Assigner chaque graphique à la bonne colonne
+            #st.subheader(f"Distribution de {col}")
+            fig2, ax2 = plt.subplots(figsize=(8, 5))
+            sns.countplot(data=df, x=col, hue=col, ax=ax2)
+            ax2.set_title(f"Distribution de {col}")
+            ax2.set_xlabel(col)
+            ax2.set_ylabel("Fréquence")
+            st.pyplot(fig2)
+
+
+    
 elif option == "Fill the form":
     st.title("Fill the form")
     st.markdown("""
