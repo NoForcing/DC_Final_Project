@@ -93,6 +93,7 @@ elif option == "Dashbord of the data":
     sns.barplot(data=top_marques, x='marque',y='count', hue='marque',palette='viridis')
     plt.title("Top 5 des marques les plus vendues")
     plt.xlabel("Marque")
+    plt.show()
     fig = sns.pairplot(data=df)
     #st.pyplot(fig)
 elif option == "Fill the form":
