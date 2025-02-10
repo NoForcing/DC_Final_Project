@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import fonctions as fn
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 
@@ -84,10 +85,16 @@ elif option == "Download scraped data":
     #st.write(data1)
 elif option == "Dashbord of the data":
     st.title("Dashbord of the data")
-    df=pd.read_csv('data/web_scraper/raw/dakar_auto.csv')
-    df = pd.read_csv('data/web_scraper/raw/dakar_auto.csv')
+    df=pd.read_csv('data/auto_data_cleaned.csv')
+    top_marques = df['marque'].value_counts().nlargest(5).reset_index()
+    
+    # Diagramme à barres
+    plt.figure(figsize=(8, 5))
+    sns.barplot(data=top_marques, x='marque',y='count', hue='marque',palette='viridis')
+    plt.title("Top 5 des marques les plus vendues")
+    plt.xlabel("Marque")
     fig = sns.pairplot(data=df)
-    st.pyplot(fig)
+    #st.pyplot(fig)
 elif option == "Fill the form":
     st.title("Fill the form")
     st.markdown("""
